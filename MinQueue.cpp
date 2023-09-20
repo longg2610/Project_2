@@ -2,78 +2,156 @@
 #include <string.h>
 template <typename T>
 MinQueue<T>::MinQueue()
+/*
+Long
+*/
 {
-
+    length = 0;
+    heap_size = 0;
 }
 
 template <typename T>
-MinQueue<T>::MinQueue(T* A, int n)
+MinQueue<T>::MinQueue(T *A, int n)
+/*
+Long
+*/
 {
-    heapArr = new T[n];
-    memset(heapArr, '\0', n);
-    int arr[10] = {70,50,3,46,49,42,36,45,69,94};
-    for (int i{}; i < 10;i++)
-        heapArr[i] = arr[i];
+    (*this).allocate(n);
+    // memset(heapArr, '\0', n);
+    for (int i{}; i < n; i++)
+        (*this).set(i, A[i]);
+    (*this).build_heap();
 }
 
 template <typename T>
-void MinQueue<T>::max_heapify(int i)
+void MinQueue<T>::min_heapify(int i)
+/*
+Long
+*/
 {
     int l = left(i);
     int r = right(i);
-    int largest{i};
-    if (l <= heap_size && heapArr[l] > heapArr[i])
-        largest = l;
-    if (r <= heap_size && heapArr[r] > heapArr[i])
-        largest = r;
-    if(largest != i)
+    int smallest{};
+    if (l < heap_size && heapArr[l] < heapArr[i])
+        smallest = l;
+    else
+        smallest = i;
+    if (r < heap_size && heapArr[r] < heapArr[smallest])
+        smallest = r;
+    if (smallest != i)
     {
-        T temp = heapArr[largest];
-        heapArr[largest] = heapArr[i];
-        heapArr[i] = temp;
-        max_heapify(largest);
+        swap(heapArr[smallest], heapArr[i]);
+        min_heapify(smallest);
     }
 }
 template <typename T>
 void MinQueue<T>::build_heap()
+/*
+Long
+*/
 {
-
+    heap_size = length;
+    for (int i{length / 2 - 1}; i >= 0; i--)
+        min_heapify(i);
 }
 template <typename T>
-void MinQueue<T>::sort(T* A)
+void MinQueue<T>::sort(T* A) //not sure if sort() sorts MinQueue array or A
+/*
+Long
+*/
 {
-
+    //operations on member array, if empty
+    if(length == 0)
+    {
+        return;
+    }
+    //if heapArr not empty
+    (*this).build_heap();
+    for (int j{length - 1}; j > 0; j--)
+    {
+        swap(heapArr[j], heapArr[0]);
+        heap_size--;
+        min_heapify(0);
+    }
+    
+    //operations on A
+    int begin{0};
+    int end{length - 1};
+    while(begin < end)
+    {
+        swap(A[begin], A[end]);
+        begin++;
+        end--;
+    }
 }
 template <typename T>
 void MinQueue<T>::insert(T x)
 {
-
 }
 template <typename T>
 T MinQueue<T>::min()
 {
-
 }
 template <typename T>
 T MinQueue<T>::extract_min()
 {
-
 }
 template <typename T>
 void MinQueue<T>::decrease_key(int i, T k)
 {
-
 }
 template <typename T>
 string MinQueue<T>::to_string()
+/*
+Long
+*/
 {
     int i{};
-    T elem = heapArr[i];
+    T elem;
     stringstream mqString;
-    while(elem != '\0')
+    for (int i{}; i < length; i++)
     {
-        mqString << elem << ' ';
-        elem = heapArr[++i];
+        elem = heapArr[i];
+        if(i != length - 1)
+            mqString << elem << ' ';
+        else mqString << elem;
     }
     return mqString.str();
+}
+
+template <typename T>
+MinQueue<T>::~MinQueue()
+{
+    // delete [] heapArr;
+}
+
+template <typename T>
+void MinQueue<T>::swap(T &a, T &b)
+/*
+Long
+*/
+{
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+template <typename T>
+void MinQueue<T>::set(int i, T val)
+/*
+Long
+*/
+{
+    heapArr[i] = val;
+}
+
+template <typename T>
+void MinQueue<T>::allocate(int n)
+/*
+Long
+*/
+{
+    heap_size = n;
+    length = n;
+    heapArr = new T[n];
 }
