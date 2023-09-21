@@ -56,7 +56,29 @@ public:
     }
     T min();
     T extract_min();
-    void decrease_key(int i, T k);
+    void decrease_key(int i, T k){
+            if (i < 0 || i >= heap_size) {
+        cout << "Invalid index for decrease_key." << endl;
+        return;
+    }
+
+    if (k >= heapArr[i]) {
+        cout << "New value is not smaller than the current value." << endl;
+        return;
+    }
+
+    heapArr[i] = k;
+
+    while (i > 0) {
+        int parent = (i - 1) / 2;
+        if (heapArr[i] < heapArr[parent]) {
+            swap(heapArr[i], heapArr[parent]);
+            i = parent;
+        } else {
+            break;
+        }
+    }
+    }
 
     //testing
     string to_string();
