@@ -162,6 +162,9 @@ template <typename T>
 T MinQueue<T>::min(){
     /*
     Thomas
+        Find the minimum value of queue
+        Input: none
+        Output: the minimum value at position 0
     */
         if (heap_size == 0) {
             cout<<"Empty queue"<<endl;
@@ -172,6 +175,9 @@ template <typename T>
 T MinQueue<T>::extract_min() {
     /*
     Thomas
+        Extract the min value in the queue
+        Input: none
+        Output: the T value
     */
         if (heap_size == 0) {
             cout<<"Empty queue"<<endl;;
@@ -192,6 +198,9 @@ template <typename T>
 void MinQueue<T>::remove(int positionIndex) {
     /*
     Thomas
+    remove value at integer positionIndex in the queue
+    input: int positionIndex
+    output: void
     */
     for (int i = 0; i < heap_size; ++i) {
         if (position[i] == positionIndex) {
