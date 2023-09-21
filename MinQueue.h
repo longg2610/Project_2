@@ -32,7 +32,28 @@ public:
     void sort(T* A);
 
     //MinQueue operations
-    void insert(T x);
+    void insert(T x){
+        if (heap_size == length) {
+        cout << "MinQueue is full. Cannot insert." << endl;
+        return;
+    }
+
+    int i = heap_size;
+    heapArr[heap_size] = x;
+    heap_size++;
+
+    while (i > 0) {
+        int parent = (i - 1) / 2;
+        if (heapArr[i] < heapArr[parent]) {
+            swap(heapArr[i], heapArr[parent]);
+            i = parent;
+        } else {
+            break;
+        }
+    }
+}
+
+    }
     T min();
     T extract_min();
     void decrease_key(int i, T k);
