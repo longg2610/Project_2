@@ -44,6 +44,9 @@ public:
 
     //Additional function
     void remove(int index);
+    void insert_version2(T x, int index);
+    MinQueue_version2(int length) : heap_size(0), length(length);
+    void min_heapify_version2(int i);
 };
 
 #include "MinQueue.cpp"
