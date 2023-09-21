@@ -124,31 +124,31 @@ Long
         A[i] = heapArr[i];
 }
 template <typename T>
-void MinQueue<T>::insert_version2(T x, int index) {
+void MinQueue<T>::void insert_version2(T x, int positionIndex) {
     /*
     Thomas
     */
-        if (heap_size == length) {
-            cout << "Full queue" << endl;;
+    if (heap_size == length) {
+        cout << "Full queue" << endl;
+    }
+
+    int i = heap_size;
+    heapArr[heap_size] = x;
+    position[heap_size] = positionIndex;
+    heap_size++;
+
+    while (i > 0) {
+        int parent = (i - 1) / 2;
+        if (heapArr[i] < heapArr[parent]) {
+            swap(heapArr[i], heapArr[parent]);
+            swap(position[i], position[parent]);
+            i = parent;
         }
-
-        int i = heap_size;
-        heapArr[heap_size] = x;
-        position[heap_size] = index;
-        heap_size++;
-
-        while (i > 0) {
-            int parent = (i - 1) / 2;
-            if (heapArr[i] < heapArr[parent]) {
-                swap(heapArr[i], heapArr[parent]);
-                swap(position[i], position[parent]);
-                i = parent;
-            }
-            else {
-                break;
-            }
+        else {
+            break;
         }
     }
+}
 template <typename T>
 T MinQueue<T>::min(){
     /*
