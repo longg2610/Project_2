@@ -178,6 +178,26 @@ T MinQueue<T>::extract_min() {
 
         return root;
     }
+
+template <typename T>
+void MinQueue<T>::remove(int index) {
+    /*
+    Thomas
+    */
+        for (int i = 0; i < heap_size; ++i) {
+            if (position[i] == index) {
+                heapArr[i] = heapArr[heap_size - 1];
+                position[i] = position[heap_size - 1];
+                heap_size--;
+
+                min_heapify_version2(i);
+                break;
+            }
+        }
+    }
+
+
+
 template <typename T>
 void MinQueue<T>::decrease_key(int i, T k)
 {
