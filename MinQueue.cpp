@@ -94,6 +94,10 @@ void MinQueue<T>::insert(T x)
 template <typename T>
 T MinQueue<T>::min()
 {
+    if (heap_size == 0) {
+    cout<<"Empty queue"<<endl;;
+}
+return items[0];
 }
 template <typename T>
 T MinQueue<T>::extract_min()
