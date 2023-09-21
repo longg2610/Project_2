@@ -139,24 +139,15 @@ void test_slidingWindow(){
 int nums1[] = { 1, 3, -1, -3, 5, 3, 6, 7 };
 int k1 = 3;
 
-vector<int> result1 = minSlidingWindow(nums1, 8, k1);
-cout << "[";
-for (int i = 0; i < result1.size(); ++i) {
-    if (i > 0) cout << ",";
-    cout << result1[i];
-}
-cout << "]" << endl; 
+string result1 = minSlidingWindow(nums1, 8, k1);
+cout << result1<< endl;
+
 
 int nums2[] = { 1, 2, 6, 8, 9, -7, -2, 7 };
 int k2 = 3;
 
-vector<int> result2 = minSlidingWindow(nums2, 8, k2);
-cout << "[";
-for (int i = 0; i < result2.size(); ++i) {
-    if (i > 0) cout << ",";
-    cout << result2[i];
-}
-cout << "]" << endl;
+string result2 = minSlidingWindow(nums2, 8, k2);
+cout << result2 << endl;
 }
 int main()
 {
