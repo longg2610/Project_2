@@ -133,6 +133,9 @@ template <typename T>
 void MinQueue<T>::void insert_version2(T x, int positionIndex) {
     /*
     Thomas
+        Insert the value type T x in the heap and compare with the other nodes then swap if neccesary
+        Input: x type T and integer positionIndex
+        Output: void
     */
     if (heap_size == length) {
         cout << "Full queue" << endl;
