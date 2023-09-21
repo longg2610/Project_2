@@ -41,6 +41,9 @@ public:
     string to_string();
     void set(int i, T val);
     void allocate(int n);
+
+    //Additional function
+    void remove(int index);
 };
 
 #include "MinQueue.cpp"
