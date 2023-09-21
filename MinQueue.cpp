@@ -23,7 +23,16 @@ Long
         (*this).set(i, A[i]);
     (*this).build_heap();
 }
-
+/////////////////////////////////////////
+template <typename T>
+MinQueue<T>::MinQueue_version2(int length) : heap_size(0), length(length) {
+/*
+Thomas
+*/
+    heapArr = new T[length];
+    position = new int[length];
+}
+/////////////////////////////////////////
 template <typename T>
 void MinQueue<T>::min_heapify(int i)
 /*
@@ -45,6 +54,33 @@ Long
         min_heapify(smallest);
     }
 }
+//////////////////////////////////////////////////
+
+template <typename T>
+void MinQueue<T>::min_heapify_version2(int i) {
+/*
+Thomas
+*/
+    int minimum = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < heap_size && heapArr[left] < heapArr[minimum])
+        minimum = left;
+
+    if (right < heap_size && heapArr[right] < heapArr[minimum])
+        minimum = right;
+
+    if (minimum != i) {
+        swap(heapArr[i], heapArr[minimum]);
+        swap(position[i], position[minimum]);
+        min_heapify_version2(minimum);
+    }
+}
+//////////////////////////////////////////////////////
+
+
+
 template <typename T>
 void MinQueue<T>::build_heap()
 /*
@@ -88,38 +124,60 @@ Long
         A[i] = heapArr[i];
 }
 template <typename T>
-void MinQueue<T>::insert(T x)
-{
-}
-template <typename T>
-T MinQueue<T>::min()
-{
-/*
-Thomas
-*/
-    if (heap_size == 0) {
-    cout<<"Empty queue"<<endl;;
-}
-return heapArr[0];
-}
-template <typename T>
-T MinQueue<T>::extract_min()
-{
-/*
-Thomas
-*/
-    if (heap_size == 0) {
-    cout<<"Empty queue"<<endl;;
-}
+void MinQueue<T>::insert_version2(T x, int index) {
+    /*
+    Thomas
+    */
+        if (heap_size == length) {
+            cout << "Full queue" << endl;;
+        }
 
-T root = heapArr[0];
-heapArr[0] = heapArr[heap_size - 1];
-position[0] = position[heap_size - 1];
-heap_size--;
-min_heapify(0);
+        int i = heap_size;
+        heapArr[heap_size] = x;
+        position[heap_size] = index;
+        heap_size++;
 
-return root;
-}
+        while (i > 0) {
+            int parent = (i - 1) / 2;
+            if (heapArr[i] < heapArr[parent]) {
+                swap(heapArr[i], heapArr[parent]);
+                swap(position[i], position[parent]);
+                i = parent;
+            }
+            else {
+                break;
+            }
+        }
+    }
+template <typename T>
+T MinQueue<T>::min(){
+    /*
+    Thomas
+    */
+        if (heap_size == 0) {
+            cout<<"Empty queue"<<endl;
+        }
+        return heapArr[0];
+    }
+template <typename T>
+T MinQueue<T>::extract_min() {
+    /*
+    Thomas
+    */
+        if (heap_size == 0) {
+            cout<<"Empty queue"<<endl;;
+        }
+
+        T root = heapArr[0];
+
+        heapArr[0] = heapArr[heap_size - 1];
+        position[0] = position[heap_size - 1];
+        heap_size--;
+
+        min_heapify_version2(0);
+
+        return root;
+    }
 template <typename T>
 void MinQueue<T>::decrease_key(int i, T k)
 {
