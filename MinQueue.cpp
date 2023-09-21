@@ -1,5 +1,6 @@
 #include "MinQueue.h"
 #include <string.h>
+#include <vector>
 template <typename T>
 MinQueue<T>::MinQueue()
 /*
