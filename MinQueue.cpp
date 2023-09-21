@@ -79,10 +79,12 @@ Long
     int end{length - 1};
     while(begin < end)
     {
-        swap(A[begin], A[end]);
+        swap(heapArr[begin], heapArr[end]);
         begin++;
         end--;
     }
+     for(int i{}; i < length; i++)
+        A[i] = heapArr[i];
 }
 template <typename T>
 void MinQueue<T>::insert(T x)
