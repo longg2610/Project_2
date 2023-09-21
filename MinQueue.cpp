@@ -26,9 +26,9 @@ Long
 /////////////////////////////////////////
 template <typename T>
 MinQueue<T>::MinQueue_version2(int length) : heap_size(0), length(length) {
-/*
-Thomas
-*/
+    /*
+    Thomas
+    */
     heapArr = new T[length];
     position = new int[length];
 }
