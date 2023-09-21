@@ -94,14 +94,31 @@ void MinQueue<T>::insert(T x)
 template <typename T>
 T MinQueue<T>::min()
 {
+/*
+Thomas
+*/
     if (heap_size == 0) {
     cout<<"Empty queue"<<endl;;
 }
-return items[0];
+return heapArr[0];
 }
 template <typename T>
 T MinQueue<T>::extract_min()
 {
+/*
+Thomas
+*/
+    if (heap_size == 0) {
+    cout<<"Empty queue"<<endl;;
+}
+
+T root = heapArr[0];
+heapArr[0] = heapArr[heap_size - 1];
+position[0] = position[heap_size - 1];
+heap_size--;
+min_heapify(0);
+
+return root;
 }
 template <typename T>
 void MinQueue<T>::decrease_key(int i, T k)
