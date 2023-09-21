@@ -60,6 +60,9 @@ template <typename T>
 void MinQueue<T>::min_heapify_version2(int i) {
 /*
 Thomas
+Compare every node in the heap and change position if neccesary to place the minimum value above other nodes
+Input: integer i
+Output: void (a min heap)
 */
     int minimum = i;
     int left = 2 * i + 1;
