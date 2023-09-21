@@ -180,21 +180,21 @@ T MinQueue<T>::extract_min() {
     }
 
 template <typename T>
-void MinQueue<T>::remove(int index) {
+void MinQueue<T>::remove(int positionIndex) {
     /*
     Thomas
     */
-        for (int i = 0; i < heap_size; ++i) {
-            if (position[i] == index) {
-                heapArr[i] = heapArr[heap_size - 1];
-                position[i] = position[heap_size - 1];
-                heap_size--;
+    for (int i = 0; i < heap_size; ++i) {
+        if (position[i] == positionIndex) {
+            heapArr[i] = heapArr[heap_size - 1];
+            position[i] = position[heap_size - 1];
+            heap_size--;
 
-                min_heapify_version2(i);
-                break;
-            }
+            min_heapify_version2(i);
+            break;
         }
     }
+}
 
 
 
