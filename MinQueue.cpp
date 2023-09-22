@@ -219,6 +219,36 @@ void MinQueue<T>::remove(int positionIndex) {
 template <typename T>
 void MinQueue<T>::decrease_key(int i, T k)
 {
+    /*    // Decreases the value of the element at index i to k while preserving the min-heap property.
+     Preconditions:
+     - The index i is valid (0 <= i < heap_size).
+     - The new value k is smaller than the current value at index i.
+     Postconditions: The element at index i is updated to the new value k, and the min-heap property is preserved.
+     Parameters:
+     - i: The index of the element to be updated.
+     - k: The new value to which the element at index i should be decreased.
+     Return value: void*/
+    if (i < 0 || i >= heap_size) {
+        cout << "Invalid index for decrease_key." << endl;
+        return;
+    }
+
+    if (k >= heapArr[i]) {
+        cout << "New value is not smaller than the current value." << endl;
+        return;
+    }
+
+    heapArr[i] = k;
+
+    while (i > 0) {
+        int parent = (i - 1) / 2;
+        if (heapArr[i] < heapArr[parent]) {
+            swap(heapArr[i], heapArr[parent]);
+            i = parent;
+        } else {
+            break;
+        }
+    }
 }
 template <typename T>
 string MinQueue<T>::to_string()
@@ -274,4 +304,32 @@ Long
     heap_size = n;
     length = n;
     heapArr = new T[n];
+}
+
+void MinQueue<T>::insert(T x) {
+    /* Inserts element x into the MinQueue while maintaining the min-heap property.
+     Preconditions: The MinQueue is not full (heap_size < length).
+     Parameters:
+     - x: The element to be inserted into the MinQueue.
+     Postconditions: Element x is inserted into the MinQueue, and the min-heap property is preserved.
+     Return value: void
+    */
+    if (heap_size == length) {
+        cout << "MinQueue is full. Cannot insert." << endl;
+        return;
+    }
+
+    int i = heap_size;
+    heapArr[heap_size] = x;
+    heap_size++;
+
+    while (i > 0) {
+        int parent = (i - 1) / 2;
+        if (heapArr[i] < heapArr[parent]) {
+            swap(heapArr[i], heapArr[parent]);
+            i = parent;
+        } else {
+            break;
+        }
+    }
 }
